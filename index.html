@@ -1,0 +1,1883 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#140C08" />
+  <title>Pudim do Toddy — Mini Pudim Artesanal</title>
+  <meta name="description" content="Mini pudim artesanal feito em casa com calda âmbar no ponto exato. Retirada na Rua Acácio Mendes, 795, Centro, Lagoa da Prata. Peça pelo WhatsApp ou siga @pudimdotoddy." />
+
+  <meta property="og:title" content="Pudim do Toddy — Mini Pudim Artesanal" />
+  <meta property="og:description" content="Lisinho, cremoso e com calda âmbar no ponto exato. Retirada direto no portão do Toddy." />
+  <meta property="og:type" content="website" />
+
+  <!-- Official Brand Fonts: Gloock + Hanken Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --void: #120B07;
+      --sela: #17100D;
+      --espresso: #21140E;
+      --orelha: #5A2E1A;
+      --calda: #B5541A;
+      --gema: #F1C862;
+      --leite: #F7F0E2;
+      --focinho: #EE9F95;
+      --glass: rgba(247, 240, 226, 0.045);
+      --glass-strong: rgba(247, 240, 226, 0.08);
+      --stroke: rgba(247, 240, 226, 0.12);
+      --stroke-gold: rgba(241, 200, 98, 0.32);
+      --muted: rgba(247, 240, 226, 0.66);
+      --font-display: 'Gloock', Georgia, serif;
+      --font-sans: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: auto;
+      background-color: var(--void);
+      color: var(--leite);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body {
+      background-color: var(--void);
+      color: var(--leite);
+      overflow-x: hidden;
+    }
+
+    img, svg, canvas {
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Subtle warm ambient caramel glow behind the dark canvas */
+    .ambient-bg {
+      position: relative;
+      z-index: 6;
+      margin-top: -160px;
+      padding-top: 160px;
+      background:
+        linear-gradient(180deg, rgba(18, 11, 7, 0) 0px, rgba(18, 11, 7, 0.72) 72px, var(--void) 155px),
+        radial-gradient(ellipse 70% 45% at 15% 18%, rgba(181, 84, 26, 0.16), transparent 65%),
+        radial-gradient(ellipse 65% 40% at 88% 48%, rgba(241, 200, 98, 0.1), transparent 65%),
+        radial-gradient(ellipse 60% 45% at 25% 82%, rgba(181, 84, 26, 0.14), transparent 65%);
+      background-color: transparent;
+    }
+
+    .ambient-bg::before {
+      content: "";
+      position: absolute;
+      inset: 155px 0 0 0;
+      background:
+        radial-gradient(ellipse 70% 45% at 15% 18%, rgba(181, 84, 26, 0.16), transparent 65%),
+        radial-gradient(ellipse 65% 40% at 88% 48%, rgba(241, 200, 98, 0.1), transparent 65%),
+        radial-gradient(ellipse 60% 45% at 25% 82%, rgba(181, 84, 26, 0.14), transparent 65%),
+        var(--void);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* ======================================================
+       FLOATING GLASS NAVIGATION
+       ====================================================== */
+    .top-nav {
+      position: fixed;
+      top: max(14px, env(safe-area-inset-top, 14px));
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      width: min(calc(100% - 28px), 1120px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px 10px 18px;
+      border-radius: 999px;
+      background: rgba(23, 16, 13, 0.48);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(247, 240, 226, 0.14);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .top-nav.solid {
+      background: rgba(23, 16, 13, 0.82);
+      border-color: rgba(241, 200, 98, 0.22);
+    }
+
+    .nav-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--leite);
+    }
+
+    .nav-brand img {
+      height: 24px;
+      width: auto;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-ig {
+      display: none;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: rgba(247, 240, 226, 0.85);
+      transition: color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .nav-ig:hover {
+      background: rgba(247, 240, 226, 0.08);
+      color: var(--gema);
+    }
+
+    @media (min-width: 640px) {
+      .nav-ig { display: inline-flex; align-items: center; gap: 6px; }
+    }
+
+    .nav-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 16px;
+      border-radius: 999px;
+      background: var(--gema);
+      color: var(--sela);
+      font-size: 12.5px;
+      font-weight: 700;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .nav-wa:hover {
+      background: #F6D884;
+      transform: translateY(-1px);
+    }
+
+    /* ======================================================
+       SECTION 1: FULLSCREEN DUAL-FORMAT HERO + SEAMLESS MELT
+       ====================================================== */
+    .hero-track {
+      position: relative;
+      height: 280vh;
+      width: 100%;
+      background: var(--void);
+    }
+
+    .hero-sticky {
+      position: sticky;
+      top: 0;
+      height: 100svh;
+      height: 100dvh;
+      width: 100%;
+      overflow: hidden;
+      background: var(--void);
+    }
+
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Velvety left scrim + tall seamless bottom melt into --void (#120B07) */
+    .hero-scrim {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(18, 11, 7, 0.6) 0%, rgba(18, 11, 7, 0.2) 38%, rgba(18, 11, 7, 0) 68%),
+        linear-gradient(180deg, rgba(18, 11, 7, 0.28) 0%, rgba(18, 11, 7, 0) 20%, rgba(18, 11, 7, 0) 62%, rgba(18, 11, 7, 0.45) 78%, rgba(18, 11, 7, 0.88) 92%, #120B07 100%);
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    @media (max-width: 899px) {
+      .hero-scrim {
+        background:
+          linear-gradient(180deg, rgba(18, 11, 7, 0.36) 0%, rgba(18, 11, 7, 0) 22%, rgba(18, 11, 7, 0) 54%, rgba(18, 11, 7, 0.5) 74%, rgba(18, 11, 7, 0.9) 90%, #120B07 100%);
+      }
+    }
+
+    /* Middle-Left Choreographed Hero Copy */
+    .hero-copy-layer {
+      position: absolute;
+      z-index: 8;
+      left: 24px;
+      right: 24px;
+      bottom: max(58px, env(safe-area-inset-bottom, 58px));
+      pointer-events: none;
+    }
+
+    @media (min-width: 900px) {
+      .hero-copy-layer {
+        left: 64px;
+        right: auto;
+        top: 50%;
+        bottom: auto;
+        transform: translateY(-50%);
+        width: min(460px, 38vw);
+      }
+    }
+
+    .hero-act {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      will-change: opacity, transform;
+    }
+
+    @media (min-width: 900px) {
+      .hero-act {
+        top: 50%;
+        bottom: auto;
+        transform: translateY(-50%);
+      }
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 13px;
+      border-radius: 999px;
+      background: rgba(241, 200, 98, 0.14);
+      border: 1px solid rgba(241, 200, 98, 0.34);
+      color: var(--gema);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 4.8vw, 64px);
+      line-height: 0.98;
+      font-weight: 400;
+      color: var(--leite);
+      text-shadow: 0 6px 32px rgba(0, 0, 0, 0.55);
+    }
+
+    .hero-sub {
+      margin-top: 14px;
+      font-size: clamp(14.5px, 1.3vw, 17px);
+      line-height: 1.55;
+      color: rgba(247, 240, 226, 0.86);
+      max-width: 360px;
+    }
+
+    .hero-cta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 22px;
+      padding: 13px 22px;
+      border-radius: 999px;
+      background: var(--gema);
+      color: var(--sela);
+      font-size: 13.5px;
+      font-weight: 700;
+      pointer-events: auto;
+      box-shadow: 0 12px 32px rgba(241, 200, 98, 0.28);
+      transition: transform 0.22s ease, background-color 0.22s ease;
+    }
+
+    .hero-cta-pill:hover {
+      background: #F6D884;
+      transform: translateY(-2px);
+    }
+
+    .hero-scroll-cue {
+      position: absolute;
+      left: 24px;
+      bottom: max(20px, env(safe-area-inset-bottom, 20px));
+      z-index: 10;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: rgba(247, 240, 226, 0.82);
+      pointer-events: none;
+    }
+
+    @media (min-width: 900px) {
+      .hero-scroll-cue {
+        left: 64px;
+        bottom: 28px;
+      }
+    }
+
+    .cue-dot {
+      width: 24px;
+      height: 36px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(241, 200, 98, 0.55);
+      display: flex;
+      justify-content: center;
+      padding-top: 6px;
+    }
+
+    .cue-dot::after {
+      content: "";
+      width: 3px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--gema);
+      animation: wheelDown 1.6s ease-in-out infinite;
+    }
+
+    @keyframes wheelDown {
+      0%, 100% { transform: translateY(0); opacity: 1; }
+      70% { transform: translateY(10px); opacity: 0.2; }
+    }
+
+    .hero-progress-wrap {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 3px;
+      background: rgba(247, 240, 226, 0.1);
+      z-index: 12;
+    }
+
+    .hero-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--calda), var(--gema));
+      will-change: width;
+    }
+
+    /* ======================================================
+       LAYOUT UTILITIES
+       ====================================================== */
+    .wrap {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 22px;
+    }
+
+    @media (min-width: 900px) {
+      .wrap {
+        padding: 0 48px;
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gema);
+      margin-bottom: 14px;
+    }
+
+    .kicker::before {
+      content: "";
+      width: 18px;
+      height: 1.5px;
+      background: var(--calda);
+    }
+
+    .display-h2 {
+      font-family: var(--font-display);
+      font-size: clamp(34px, 4.8vw, 60px);
+      line-height: 1.02;
+      font-weight: 400;
+      color: var(--leite);
+    }
+
+    .lead-copy {
+      font-size: clamp(15.5px, 1.5vw, 18px);
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    /* ======================================================
+       SECTION 2: PRODUCT STAGE (Interactive 3D Tilt + Glowing Showcase)
+       ====================================================== */
+    .product-section {
+      padding: 88px 0 96px;
+    }
+
+    .product-stage {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    @media (min-width: 960px) {
+      .product-stage {
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 64px;
+      }
+    }
+
+    /* 3D Tilt Interactive Visual Composition */
+    .tilt-stage {
+      position: relative;
+      perspective: 1100px;
+      padding-bottom: 34px;
+    }
+
+    .tilt-card {
+      position: relative;
+      border-radius: 28px;
+      overflow: hidden;
+      aspect-ratio: 16 / 10;
+      border: 1px solid rgba(241, 200, 98, 0.22);
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.55);
+      transform-style: preserve-3d;
+      transition: transform 0.2s ease-out;
+      cursor: pointer;
+    }
+
+    .tilt-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .tilt-sheen {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(241, 200, 98, 0.22), transparent 60%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .tilt-card:hover .tilt-sheen {
+      opacity: 1;
+    }
+
+    /* Floating overlapping creamy spoon inset */
+    .floating-inset {
+      position: absolute;
+      right: 16px;
+      bottom: 0;
+      width: clamp(140px, 36%, 220px);
+      aspect-ratio: 4 / 3;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 2px solid rgba(241, 200, 98, 0.55);
+      box-shadow: 0 24px 54px rgba(0, 0, 0, 0.65);
+      transform: rotate(3deg);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      cursor: pointer;
+      z-index: 5;
+    }
+
+    .floating-inset:hover {
+      transform: rotate(0deg) scale(1.06);
+    }
+
+    .floating-inset img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Product Details */
+    .product-info {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .title-line {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .badge-120g {
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--gema), #D8A236);
+      color: var(--sela);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    /* Dedicated Price Highlight Slot */
+    .price-spotlight {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 22px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(181, 84, 26, 0.24), rgba(241, 200, 98, 0.1));
+      border: 1px solid var(--stroke-gold);
+    }
+
+    .price-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gema);
+    }
+
+    .price-value {
+      font-family: var(--font-display);
+      font-size: 24px;
+      color: var(--leite);
+    }
+
+    .craft-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .craft-pill {
+      padding: 9px 15px;
+      border-radius: 999px;
+      background: var(--glass);
+      border: 1px solid var(--stroke);
+      font-size: 13px;
+      color: rgba(247, 240, 226, 0.88);
+    }
+
+    .btn-gold-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 18px 28px;
+      border-radius: 999px;
+      background: var(--gema);
+      color: var(--sela);
+      font-size: 15.5px;
+      font-weight: 700;
+      box-shadow: 0 16px 40px rgba(241, 200, 98, 0.24);
+      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.2s ease, box-shadow 0.25s ease;
+    }
+
+    .btn-gold-cta:hover {
+      background: #F6D884;
+      transform: translateY(-2px);
+      box-shadow: 0 22px 50px rgba(241, 200, 98, 0.34);
+    }
+
+    .btn-gold-cta svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* ======================================================
+       SECTION 3: HANGING POLAROID CAROUSEL (Socrat Blocks Physics!)
+       Real sagging string + spring + velocity-reactive pendulum swing!
+       ====================================================== */
+    .polaroid-section {
+      padding: 56px 0 92px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .polaroid-header {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    @media (min-width: 820px) {
+      .polaroid-header {
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: space-between;
+      }
+    }
+
+    .polaroid-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .circle-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: var(--glass);
+      color: var(--leite);
+      font-size: 18px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .circle-btn:hover {
+      background: var(--gema);
+      border-color: var(--gema);
+      color: var(--sela);
+      transform: scale(1.06);
+    }
+
+    .polaroid-stage {
+      position: relative;
+      width: 100%;
+      height: 490px;
+      overflow: hidden;
+      cursor: grab;
+      user-select: none;
+      touch-action: pan-y;
+    }
+
+    .polaroid-stage:active {
+      cursor: grabbing;
+    }
+
+    @media (min-width: 768px) {
+      .polaroid-stage {
+        height: 540px;
+      }
+    }
+
+    .polaroid-string-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .polaroid-item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform-origin: 50% 0%;
+      will-change: transform, opacity;
+      z-index: 3;
+    }
+
+    .polaroid-peg {
+      width: 14px;
+      height: 30px;
+      margin: -14px auto -6px;
+      border-radius: 4px;
+      background: linear-gradient(180deg, #D9A75A, #8C4719);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      position: relative;
+      z-index: 4;
+    }
+
+    .polaroid-peg::after {
+      content: "";
+      position: absolute;
+      left: 2px;
+      right: 2px;
+      top: 12px;
+      height: 2px;
+      background: rgba(23, 16, 13, 0.45);
+    }
+
+    .polaroid-frame {
+      background: var(--leite);
+      color: var(--orelha);
+      padding: 12px 12px 22px;
+      border-radius: 6px;
+      box-shadow: 0 26px 60px rgba(0, 0, 0, 0.58), 0 0 0 1px rgba(255, 255, 255, 0.25) inset;
+      transition: box-shadow 0.25s ease;
+    }
+
+    .polaroid-item.is-center .polaroid-frame {
+      box-shadow: 0 34px 80px rgba(0, 0, 0, 0.72), 0 0 0 2px var(--gema);
+    }
+
+    .polaroid-photo {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border-radius: 3px;
+      background: #2A1911;
+    }
+
+    .polaroid-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    .polaroid-caption {
+      margin-top: 13px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .polaroid-title {
+      font-family: var(--font-display);
+      font-size: 19px;
+      color: var(--orelha);
+      line-height: 1.1;
+    }
+
+    .polaroid-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--calda);
+      letter-spacing: 0.08em;
+    }
+
+    .polaroid-sub {
+      margin-top: 4px;
+      font-size: 12.5px;
+      color: rgba(90, 46, 26, 0.78);
+      line-height: 1.35;
+    }
+
+    .polaroid-hint {
+      text-align: center;
+      font-size: 12.5px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* ======================================================
+       SECTION 4: EM BREVE — MODERN GLOWING GLASS CARDS
+       ====================================================== */
+    .soon-section {
+      padding: 40px 0 96px;
+    }
+
+    .soon-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    @media (min-width: 820px) {
+      .soon-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .soon-card {
+      position: relative;
+      padding: 28px 24px;
+      border-radius: 26px;
+      background: linear-gradient(165deg, rgba(247, 240, 226, 0.06), rgba(247, 240, 226, 0.02));
+      border: 1px solid var(--stroke);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, background-color 0.3s ease;
+    }
+
+    .soon-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--stroke-gold);
+      background: linear-gradient(165deg, rgba(241, 200, 98, 0.1), rgba(181, 84, 26, 0.08));
+    }
+
+    .soon-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .soon-idx {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--calda);
+    }
+
+    .soon-pill {
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(241, 200, 98, 0.14);
+      border: 1px solid rgba(241, 200, 98, 0.32);
+      color: var(--gema);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .soon-title {
+      font-family: var(--font-display);
+      font-size: 27px;
+      color: var(--leite);
+      line-height: 1.1;
+    }
+
+    .soon-desc {
+      margin-top: 8px;
+      font-size: 14.5px;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+
+    /* ======================================================
+       SECTION 5: PORTÃO DO TODDY (GOOGLE MAPS) + @PUDIMDOTODDY
+       ====================================================== */
+    .location-social {
+      padding: 12px 0 96px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 960px) {
+      .location-social {
+        grid-template-columns: 1.18fr 0.82fr;
+        gap: 28px;
+      }
+    }
+
+    .glass-panel {
+      border-radius: 30px;
+      background: linear-gradient(165deg, rgba(247, 240, 226, 0.065), rgba(247, 240, 226, 0.02));
+      border: 1px solid var(--stroke);
+      padding: 30px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    @media (min-width: 900px) {
+      .glass-panel {
+        padding: 38px 36px;
+      }
+    }
+
+    .pickup-head {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .pickup-badge-svg {
+      width: 62px;
+      height: 62px;
+      flex-shrink: 0;
+      border-radius: 18px;
+      background: var(--gema);
+      padding: 8px;
+    }
+
+    .pickup-badge-svg img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .address-bar {
+      margin-top: 18px;
+      padding: 14px 18px;
+      border-radius: 16px;
+      background: rgba(241, 200, 98, 0.1);
+      border: 1px solid rgba(241, 200, 98, 0.24);
+      font-size: 14.5px;
+      color: var(--leite);
+      line-height: 1.45;
+    }
+
+    .address-bar strong {
+      color: var(--gema);
+      display: block;
+      font-size: 16px;
+    }
+
+    .map-frame {
+      margin-top: 16px;
+      width: 100%;
+      height: 235px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(247, 240, 226, 0.16);
+      background: var(--espresso);
+    }
+
+    .map-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      filter: invert(90%) hue-rotate(180deg) sepia(18%) saturate(85%) contrast(92%);
+      transition: filter 0.35s ease;
+    }
+
+    .map-frame:hover iframe {
+      filter: none;
+    }
+
+    .dual-btns {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    @media (min-width: 540px) {
+      .dual-btns {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .btn-glass {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 15px 20px;
+      border-radius: 999px;
+      background: rgba(247, 240, 226, 0.08);
+      border: 1px solid rgba(247, 240, 226, 0.2);
+      color: var(--leite);
+      font-size: 14px;
+      font-weight: 600;
+      transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-glass:hover {
+      background: rgba(247, 240, 226, 0.16);
+      border-color: var(--gema);
+      transform: translateY(-1px);
+    }
+
+    /* Instagram Panel */
+    .ig-mosaic {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .ig-photo {
+      border-radius: 18px;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      border: 1px solid var(--stroke);
+    }
+
+    .ig-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.55s ease;
+    }
+
+    .ig-photo:hover img {
+      transform: scale(1.06);
+    }
+
+    /* ======================================================
+       SECTION 6: CINEMATIC FOOTER CTA
+       ====================================================== */
+    .footer-cta {
+      padding: 0 0 90px;
+    }
+
+    .footer-card {
+      border-radius: 34px;
+      padding: 52px 26px;
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(241, 200, 98, 0.18), transparent 60%),
+        linear-gradient(180deg, #24150E 0%, #17100D 100%);
+      border: 1px solid var(--stroke-gold);
+    }
+
+    .footer-logo {
+      width: 180px;
+      margin: 0 auto 22px;
+    }
+
+    .footer-logo img {
+      width: 100%;
+      height: auto;
+    }
+
+    .footer-actions {
+      margin: 28px auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 380px;
+    }
+
+    .footer-meta {
+      margin-top: 26px;
+      font-size: 13px;
+      color: rgba(247, 240, 226, 0.5);
+    }
+
+    /* ======================================================
+       LIGHTBOX MODAL
+       ====================================================== */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(14, 9, 6, 0.94);
+      backdrop-filter: blur(14px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .lightbox.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 22px;
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: var(--glass);
+      color: var(--leite);
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .lightbox-img-wrap img {
+      max-width: min(960px, 92vw);
+      max-height: 72vh;
+      border-radius: 18px;
+      object-fit: contain;
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.65);
+    }
+
+    .lightbox-meta {
+      margin-top: 16px;
+      text-align: center;
+    }
+
+    .lightbox-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      color: var(--gema);
+    }
+
+    .lightbox-desc {
+      margin-top: 4px;
+      font-size: 14.5px;
+      color: var(--muted);
+    }
+
+    .lightbox-nav {
+      margin-top: 18px;
+      display: flex;
+      gap: 12px;
+    }
+
+    .lightbox-btn {
+      padding: 9px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: var(--glass);
+      color: var(--leite);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .lightbox-btn:hover {
+      background: var(--gema);
+      color: var(--sela);
+      border-color: var(--gema);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Glass Top Navigation -->
+  <nav class="top-nav" id="top-nav" aria-label="Navegação principal">
+    <a href="#hero-track" class="nav-brand">
+      <img src="./assets/logo-fundo-escuro.svg" alt="Pudim do Toddy" />
+    </a>
+    <div class="nav-actions">
+      <a class="nav-ig" href="https://instagram.com/pudimdotoddy" target="_blank" rel="noopener noreferrer">@pudimdotoddy ↗</a>
+      <a class="nav-wa" href="https://wa.me/5537998420330?text=Oi!%20Vim%20pelo%20site%20do%20Pudim%20do%20Toddy%20e%20quero%20saber%20dos%20mini%20pudins!" target="_blank" rel="noopener noreferrer">
+        WhatsApp →
+      </a>
+    </div>
+  </nav>
+
+  <!-- ======================================================
+       SECTION 1: FULLSCREEN DUAL-FORMAT HERO
+       (Melts seamlessly into warm dark espresso canvas below!)
+       ====================================================== -->
+  <section class="hero-track" id="hero-track" aria-label="Animação interativa do Toddy derramando calda no mini pudim">
+    <div class="hero-sticky">
+      <canvas id="hero-canvas"></canvas>
+      <div class="hero-scrim" aria-hidden="true"></div>
+
+      <!-- Choreographed Middle-Left Copy (2 Acts) -->
+      <div class="hero-copy-layer">
+        <div class="hero-act" id="hero-act-1">
+          <span class="hero-tag">Receita de casa · Lagoa da Prata</span>
+          <h1 class="hero-title">Calda no ponto.<br />Textura sem pressa.</h1>
+          <p class="hero-sub">
+            Desça devagar para acompanhar a calda escorrendo sobre o nosso mini pudim artesanal.
+          </p>
+        </div>
+
+        <div class="hero-act" id="hero-act-2" style="opacity: 0; pointer-events: none;">
+          <span class="hero-tag">Retirada no portão · @pudimdotoddy</span>
+          <div class="hero-title">Aprovado<br />pelo chefe.</div>
+          <p class="hero-sub">
+            Lisinho, zero furinhos e pronto para buscar aqui na porta onde o Toddy fica de guarda.
+          </p>
+          <a
+            class="hero-cta-pill"
+            href="https://wa.me/5537998420330?text=Oi!%20Vim%20pelo%20site%20do%20Pudim%20do%20Toddy%20e%20quero%20reservar%20meu%20mini%20pudim!"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>Pedir agora no WhatsApp</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-scroll-cue" id="hero-scroll-cue">
+        <span class="cue-dot"></span>
+        <span>Role para derramar a calda</span>
+      </div>
+
+      <div class="hero-progress-wrap" aria-hidden="true">
+        <div class="hero-progress-bar" id="hero-progress-bar"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       WARM ESPRESSO AMBIENT CANVAS (Zero harsh white cut!)
+       ====================================================== -->
+  <div class="ambient-bg">
+
+    <!-- Section 2: Interactive 3D-Tilt Product Stage (ONLY place mentioning 120g) -->
+    <section class="product-section">
+      <div class="wrap">
+        <div class="product-stage reveal">
+          <!-- Interactive 3D Tilt Photo Stage -->
+          <div class="tilt-stage">
+            <div class="tilt-card" id="tilt-card" data-lightbox-src="./assets/galeria/mini-pudins-bancada.webp" data-lightbox-title="Mini Pudins recém-saídos da cozinha" data-lightbox-desc="Produção artesanal diária inspecionada de perto pelo Toddy.">
+              <img src="./assets/galeria/mini-pudins-bancada.webp" alt="Bancada com mini pudins artesanais e o Toddy" loading="lazy" />
+              <div class="tilt-sheen" id="tilt-sheen"></div>
+            </div>
+            <div class="floating-inset" data-lightbox-src="./assets/galeria/colherada-cremosa.webp" data-lightbox-title="Textura ultra lisa" data-lightbox-desc="Zero furinhos e calda âmbar brilhante.">
+              <img src="./assets/galeria/colherada-cremosa.webp" alt="Close-up da colherada cremosa de pudim" loading="lazy" />
+            </div>
+          </div>
+
+          <!-- Product Info -->
+          <div class="product-info">
+            <span class="kicker">Disponível hoje</span>
+
+            <div class="title-line">
+              <h2 class="display-h2">Mini Pudim Tradicional</h2>
+              <span class="badge-120g">120g</span>
+            </div>
+
+            <p class="lead-copy">
+              O clássico de leite condensado que derrete na boca, sem furinhos e com calda âmbar feita no fogo baixo. Porção individual perfeita para matar a vontade na hora.
+            </p>
+
+            <!-- QUANDO DEFINIR O PREÇO BAIXO, TROQUE O TEXTO ABAIXO (ex: R$ 8,00) -->
+            <div class="price-spotlight">
+              <span class="price-label">Valor especial</span>
+              <span class="price-value">Consultar no WhatsApp</span>
+            </div>
+
+            <div class="craft-pills">
+              <span class="craft-pill">Zero furinhos</span>
+              <span class="craft-pill">Calda âmbar caseira</span>
+              <span class="craft-pill">Retirada no Centro</span>
+            </div>
+
+            <a
+              class="btn-gold-cta"
+              href="https://wa.me/5537998420330?text=Oi!%20Escaneiei%20o%20QR%20Code%20do%20Pudim%20do%20Toddy%20e%20quero%20saber%20dos%20mini%20pudins!"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.52 3.48A11.86 11.86 0 0 0 12.06 0C5.49 0 .14 5.35.14 11.92c0 2.1.55 4.15 1.59 5.96L0 24l6.29-1.65a11.88 11.88 0 0 0 5.77 1.47h.01c6.57 0 11.92-5.35 11.92-11.92 0-3.18-1.24-6.17-3.47-8.42ZM12.07 21.8h-.01a9.87 9.87 0 0 1-5.04-1.38l-.36-.21-3.73.98 1-3.64-.24-.37a9.86 9.86 0 0 1-1.52-5.26c0-5.46 4.44-9.9 9.91-9.9 2.64 0 5.13 1.03 7 2.9a9.84 9.84 0 0 1 2.9 7c0 5.46-4.45 9.88-9.91 9.88Zm5.43-7.41c-.3-.15-1.76-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.08-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.21 5.09 4.5.71.31 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z"/></svg>
+              Reservar no WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Interactive Hanging Polaroid Carousel (Real Spring + Pendulum Physics!) -->
+    <section class="polaroid-section reveal" aria-labelledby="album-titulo">
+      <div class="wrap">
+        <div class="polaroid-header">
+          <div>
+            <span class="kicker">Álbum interativo</span>
+            <h2 class="display-h2" id="album-titulo">Na cozinha do Toddy</h2>
+          </div>
+          <div class="polaroid-controls">
+            <button class="circle-btn" id="pol-prev" aria-label="Foto anterior">←</button>
+            <button class="circle-btn" id="pol-next" aria-label="Próxima foto">→</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="polaroid-stage" id="polaroid-stage">
+        <svg class="polaroid-string-svg" id="polaroid-svg" preserveAspectRatio="none">
+          <path id="polaroid-rope" fill="none" stroke="rgba(241, 200, 98, 0.55)" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <div id="polaroid-track"></div>
+      </div>
+
+      <p class="polaroid-hint">Arraste as fotos no varal ou clique na foto em destaque para ampliar</p>
+    </section>
+
+    <!-- Section 4: Em Breve — Glowing Glass Cards -->
+    <section class="soon-section reveal" aria-labelledby="novidades-titulo">
+      <div class="wrap">
+        <span class="kicker">Próximas fornadas</span>
+        <h2 class="display-h2" id="novidades-titulo">Novidades saindo do forno</h2>
+
+        <div class="soon-grid">
+          <div class="soon-card">
+            <div class="soon-top">
+              <span class="soon-idx">01</span>
+              <span class="soon-pill">Em breve</span>
+            </div>
+            <div>
+              <h3 class="soon-title">Pudim Fit</h3>
+              <p class="soon-desc">Versão mais leve, mantendo toda a cremosidade e o capricho da receita da casa.</p>
+            </div>
+          </div>
+
+          <div class="soon-card">
+            <div class="soon-top">
+              <span class="soon-idx">02</span>
+              <span class="soon-pill">Em breve</span>
+            </div>
+            <div>
+              <h3 class="soon-title">Pudim de Leite em Pó</h3>
+              <p class="soon-desc">Textura aveludada e sabor marcante com gostinho de infância em cada colherada.</p>
+            </div>
+          </div>
+
+          <div class="soon-card">
+            <div class="soon-top">
+              <span class="soon-idx">03</span>
+              <span class="soon-pill">Em breve</span>
+            </div>
+            <div>
+              <h3 class="soon-title">Entrega / Delivery</h3>
+              <p class="soon-desc">Logo logo vamos levar o Pudim do Toddy geladinho direto até a sua porta.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Retirada no Portão (Google Maps) + Instagram @pudimdotoddy -->
+    <section class="wrap reveal">
+      <div class="location-social">
+        <!-- Pickup + Google Maps -->
+        <div class="glass-panel">
+          <div>
+            <div class="pickup-head">
+              <div class="pickup-badge-svg">
+                <img src="./assets/simbolo-fundo-claro.svg" alt="Símbolo do Toddy" />
+              </div>
+              <div>
+                <span class="kicker" style="margin-bottom: 4px;">Retirada presencial</span>
+                <h2 class="display-h2" style="font-size: clamp(26px, 3vw, 38px);">Direto no portão do Toddy</h2>
+              </div>
+            </div>
+
+            <p class="lead-copy" style="margin-top: 16px;">
+              Por enquanto, os mini pudins são retirados somente aqui na porta — onde o Toddy fica de guarda (é só procurar a nossa plaquinha!).
+            </p>
+
+            <div class="address-bar">
+              <strong>Rua Acácio Mendes, 795</strong>
+              Bairro Centro · Lagoa da Prata — MG
+            </div>
+
+            <div class="map-frame">
+              <iframe
+                title="Localização do Pudim do Toddy — Rua Acácio Mendes, 795, Centro, Lagoa da Prata - MG"
+                src="https://maps.google.com/maps?q=Rua+Acacio+Mendes,+795,+Centro,+Lagoa+da+Prata+-+MG&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+
+          <div class="dual-btns">
+            <a
+              class="btn-glass"
+              href="https://www.google.com/maps/dir/?api=1&destination=Rua+Ac%C3%A1cio+Mendes,+795,+Centro,+Lagoa+da+Prata+-+MG"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Traçar rota no Maps ↗
+            </a>
+            <a
+              class="btn-gold-cta"
+              style="padding: 15px 20px; font-size: 14px;"
+              href="https://wa.me/5537998420330?text=Oi!%20Quero%20combinar%20a%20retirada%20do%20meu%20Pudim%20do%20Toddy!"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Chamar no WhatsApp →
+            </a>
+          </div>
+        </div>
+
+        <!-- Instagram @pudimdotoddy -->
+        <div class="glass-panel">
+          <div>
+            <span class="kicker">Instagram oficial</span>
+            <h2 class="display-h2" style="font-size: clamp(28px, 3vw, 40px);">@pudimdotoddy</h2>
+            <p class="lead-copy" style="margin-top: 10px;">
+              Acompanhe as fornadas do dia, o lançamento dos novos sabores e a rotina do Toddy no portão.
+            </p>
+          </div>
+
+          <div class="ig-mosaic">
+            <div class="ig-photo">
+              <img src="./assets/galeria/toddy-espiando.webp" alt="Toddy no Instagram @pudimdotoddy" loading="lazy" />
+            </div>
+            <div class="ig-photo">
+              <img src="./assets/galeria/toddy-surpreso.webp" alt="Toddy na cozinha @pudimdotoddy" loading="lazy" />
+            </div>
+            <div class="ig-photo">
+              <img src="./assets/galeria/toddy-pelo-vidro.webp" alt="Pudim do Toddy bastidores" loading="lazy" />
+            </div>
+            <div class="ig-photo">
+              <img src="./assets/galeria/toddy-desenformando.webp" alt="Toddy desenformando pudim" loading="lazy" />
+            </div>
+          </div>
+
+          <a
+            class="btn-glass"
+            style="width: 100%;"
+            href="https://instagram.com/pudimdotoddy"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Seguir @pudimdotoddy no Instagram ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Final CTA -->
+    <footer class="footer-cta reveal">
+      <div class="wrap">
+        <div class="footer-card">
+          <div class="footer-logo">
+            <img src="./assets/logo-fundo-escuro.svg" alt="Pudim do Toddy" />
+          </div>
+          <h2 class="display-h2">Bateu vontade agora?</h2>
+          <p class="lead-copy" style="max-width: 440px; margin: 12px auto 0;">
+            Mande um oi no WhatsApp para ver os mini pudins disponíveis hoje e já reservar o seu!
+          </p>
+
+          <div class="footer-actions">
+            <a
+              class="btn-gold-cta"
+              href="https://wa.me/5537998420330?text=Oi!%20Vim%20pelo%20site%20do%20Pudim%20do%20Toddy%20e%20quero%20reservar%20meu%20mini%20pudim!"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Chamar no WhatsApp · (37) 99842-0330
+            </a>
+            <a
+              class="btn-glass"
+              href="https://instagram.com/pudimdotoddy"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              @pudimdotoddy ↗
+            </a>
+          </div>
+
+          <div class="footer-meta">
+            Rua Acácio Mendes, 795 · Centro · Lagoa da Prata — MG
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Fullscreen Lightbox Modal -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visualizador de foto">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Fechar">×</button>
+    <div class="lightbox-img-wrap">
+      <img id="lightbox-img" src="" alt="" />
+    </div>
+    <div class="lightbox-meta">
+      <div class="lightbox-title" id="lightbox-title"></div>
+      <div class="lightbox-desc" id="lightbox-desc"></div>
+    </div>
+    <div class="lightbox-nav" id="lightbox-nav">
+      <button class="lightbox-btn" id="lightbox-prev">← Anterior</button>
+      <button class="lightbox-btn" id="lightbox-next">Próxima →</button>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      /* ======================================================
+         1. DUAL-FORMAT 60FPS FULLSCREEN SCROLL SCRUBBING
+         ====================================================== */
+      const FRAME_COUNT = 120;
+      const canvas = document.getElementById('hero-canvas');
+      const ctx = canvas.getContext('2d', { alpha: false });
+      const track = document.getElementById('hero-track');
+      const topNav = document.getElementById('top-nav');
+      const act1 = document.getElementById('hero-act-1');
+      const act2 = document.getElementById('hero-act-2');
+      const scrollCue = document.getElementById('hero-scroll-cue');
+      const progressBar = document.getElementById('hero-progress-bar');
+
+      const cache = {
+        desktop: new Array(FRAME_COUNT),
+        mobile: new Array(FRAME_COUNT),
+      };
+      const loadedMode = { desktop: false, mobile: false };
+      let activeMode = window.innerWidth > window.innerHeight ? 'desktop' : 'mobile';
+      let drawnFrame = -1;
+      let targetProgress = 0;
+      let currentProgress = 0;
+
+      const pad = (n) => String(n).padStart(3, '0');
+      const getFrameUrl = (mode, idx) =>
+        mode === 'desktop'
+          ? `./frames-desktop/frame_${pad(idx + 1)}.webp`
+          : `./frames/frame_${pad(idx + 1)}.webp`;
+
+      function drawImageCover(img) {
+        if (!img || !img.complete || img.naturalWidth === 0) return;
+        const cw = canvas.width, ch = canvas.height;
+        const iw = img.naturalWidth, ih = img.naturalHeight;
+        const scale = Math.max(cw / iw, ch / ih);
+        const w = iw * scale, h = ih * scale;
+        ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
+      }
+
+      function findNearestLoaded(mode, idx) {
+        const list = cache[mode];
+        if (list[idx] && list[idx].complete && list[idx].naturalWidth > 0) return list[idx];
+        for (let o = 1; o < FRAME_COUNT; o++) {
+          if (idx - o >= 0 && list[idx - o]?.complete && list[idx - o].naturalWidth > 0) return list[idx - o];
+          if (idx + o < FRAME_COUNT && list[idx + o]?.complete && list[idx + o].naturalWidth > 0) return list[idx + o];
+        }
+        return null;
+      }
+
+      function renderFrame(idx) {
+        const clamped = Math.max(0, Math.min(FRAME_COUNT - 1, idx));
+        if (clamped === drawnFrame) return;
+        const img = findNearestLoaded(activeMode, clamped);
+        if (img) {
+          drawImageCover(img);
+          if (img === cache[activeMode][clamped]) drawnFrame = clamped;
+        }
+      }
+
+      function preloadMode(mode) {
+        if (loadedMode[mode]) return;
+        loadedMode[mode] = true;
+        const list = cache[mode];
+
+        const first = new Image();
+        first.src = getFrameUrl(mode, 0);
+        first.onload = () => {
+          list[0] = first;
+          if (mode === activeMode) {
+            drawnFrame = -1;
+            renderFrame(Math.round(currentProgress * (FRAME_COUNT - 1)));
+          }
+        };
+        list[0] = first;
+
+        const order = [];
+        for (let i = 4; i < FRAME_COUNT; i += 4) order.push(i);
+        for (let i = 1; i < FRAME_COUNT; i++) if (i % 4 !== 0) order.push(i);
+
+        let cursor = 0;
+        function loadNext() {
+          if (cursor >= order.length) return;
+          const idx = order[cursor++];
+          const img = new Image();
+          img.decoding = 'async';
+          img.src = getFrameUrl(mode, idx);
+          img.onload = () => {
+            if (mode === activeMode && idx === Math.round(currentProgress * (FRAME_COUNT - 1))) {
+              drawnFrame = -1;
+              renderFrame(idx);
+            }
+            loadNext();
+          };
+          img.onerror = loadNext;
+          list[idx] = img;
+        }
+        for (let c = 0; c < 6; c++) loadNext();
+      }
+
+      function resizeCanvas() {
+        const newMode = window.innerWidth > window.innerHeight ? 'desktop' : 'mobile';
+        if (newMode !== activeMode) {
+          activeMode = newMode;
+          preloadMode(activeMode);
+        }
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.round(window.innerWidth * dpr);
+        canvas.height = Math.round(window.innerHeight * dpr);
+        drawnFrame = -1;
+        renderFrame(Math.round(currentProgress * (FRAME_COUNT - 1)));
+      }
+
+      function clamp01(v) { return Math.max(0, Math.min(1, v)); }
+
+      function animateHero() {
+        const rect = track.getBoundingClientRect();
+        const scrollable = track.offsetHeight - window.innerHeight;
+        targetProgress = scrollable > 0 ? clamp01(-rect.top / scrollable) : 0;
+        const diff = targetProgress - currentProgress;
+        currentProgress = Math.abs(diff) < 0.0005 ? targetProgress : currentProgress + diff * 0.13;
+
+        renderFrame(Math.round(currentProgress * (FRAME_COUNT - 1)));
+        progressBar.style.width = `${(currentProgress * 100).toFixed(2)}%`;
+        progressBar.parentElement.style.opacity = clamp01(1 - (currentProgress - 0.88) / 0.12).toFixed(3);
+
+        const isDesktop = window.innerWidth >= 900;
+        const baseY = isDesktop ? '-50%' : '0px';
+
+        const act1Out = clamp01((currentProgress - 0.28) / 0.18);
+        act1.style.opacity = (1 - act1Out).toFixed(3);
+        act1.style.transform = `translateY(calc(${baseY} - ${(act1Out * 24).toFixed(1)}px))`;
+
+        const act2In = clamp01((currentProgress - 0.52) / 0.18);
+        act2.style.opacity = act2In.toFixed(3);
+        act2.style.transform = `translateY(calc(${baseY} + ${((1 - act2In) * 24).toFixed(1)}px))`;
+        act2.style.pointerEvents = act2In > 0.5 ? 'auto' : 'none';
+
+        scrollCue.style.opacity = clamp01(1 - currentProgress * 5).toFixed(3);
+        topNav.classList.toggle('solid', rect.bottom <= 100);
+
+        requestAnimationFrame(animateHero);
+      }
+
+      /* ======================================================
+         2. 3D TILT EFFECT ON PRODUCT STAGE
+         ====================================================== */
+      const tiltCard = document.getElementById('tilt-card');
+      const tiltSheen = document.getElementById('tilt-sheen');
+      if (tiltCard) {
+        tiltCard.addEventListener('pointermove', (e) => {
+          const r = tiltCard.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width;
+          const py = (e.clientY - r.top) / r.height;
+          const rx = (0.5 - py) * 9;
+          const ry = (px - 0.5) * 10;
+          tiltCard.style.transform = `rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
+          tiltSheen.style.background = `radial-gradient(circle at ${(px * 100).toFixed(1)}% ${(py * 100).toFixed(1)}%, rgba(241, 200, 98, 0.26), transparent 55%)`;
+        });
+        tiltCard.addEventListener('pointerleave', () => {
+          tiltCard.style.transform = 'rotateX(0deg) rotateY(0deg)';
+        });
+      }
+
+      /* ======================================================
+         3. HANGING POLAROID CAROUSEL (Socrat Blocks Spring Physics!)
+         ====================================================== */
+      const slides = [
+        { src: './assets/galeria/toddy-mexendo-calda.webp', title: 'O ponto da calda', desc: 'Fogo baixo, paciência e olho atento na panela.' },
+        { src: './assets/galeria/toddy-calda-forminhas.webp', title: 'Forminha por forminha', desc: 'Caramelo âmbar dosado uma a uma no capricho.' },
+        { src: './assets/galeria/toddy-geladeira.webp', title: 'Descanso geladinho', desc: 'O segredo da textura firme e aveludada.' },
+        { src: './assets/galeria/toddy-desenformando.webp', title: 'Hora da verdade', desc: 'Desenformou lisinho, é festa na cozinha!' },
+        { src: './assets/galeria/toddy-controle-qualidade.webp', title: 'Controle de qualidade', desc: 'Nenhum lote sai sem a aprovação do chefe.' },
+        { src: './assets/galeria/toddy-espiando.webp', title: 'Brilho de vitrine', desc: 'Aquele reflexo de calda que dá água na boca.' },
+        { src: './assets/galeria/toddy-pelo-vidro.webp', title: 'Atenção aos detalhes', desc: 'Zero furinhos, conferido de perto pelo Toddy.' },
+        { src: './assets/galeria/toddy-equilibrando.webp', title: 'Pronto pra sair', desc: 'Só esperando o seu oi no WhatsApp.' },
+      ];
+
+      const stage = document.getElementById('polaroid-stage');
+      const polTrack = document.getElementById('polaroid-track');
+      const ropePath = document.getElementById('polaroid-rope');
+
+      const polEls = slides.map((s, i) => {
+        const el = document.createElement('div');
+        el.className = 'polaroid-item';
+        el.innerHTML = `
+          <div class="polaroid-peg"></div>
+          <div class="polaroid-frame">
+            <div class="polaroid-photo"><img src="${s.src}" alt="${s.title}" loading="lazy" /></div>
+            <div class="polaroid-caption">
+              <div class="polaroid-title">${s.title}</div>
+              <div class="polaroid-num">0${i + 1}</div>
+            </div>
+            <div class="polaroid-sub">${s.desc}</div>
+          </div>
+        `;
+        polTrack.appendChild(el);
+        return el;
+      });
+
+      const N = slides.length;
+      let pos = 0;         // continuous slide index
+      let target = 0;      // target slide index
+      let vel = 0;         // spring velocity
+      const angles = new Array(N).fill(0);
+      const angVel = new Array(N).fill(0);
+      let dragging = false;
+      let dragStartX = 0;
+      let dragStartPos = 0;
+      let movedPx = 0;
+
+      function stringY(x, w, y0, sag) {
+        const t = Math.max(0, Math.min(1, x / w));
+        return y0 + 4 * sag * t * (1 - t);
+      }
+
+      function updateRope() {
+        const w = stage.clientWidth;
+        const y0 = 42;
+        const sag = Math.min(54, w * 0.045);
+        // Quadratic bezier matching parabola 4*sag*t*(1-t) -> control point at y0 + 2*sag
+        ropePath.setAttribute('d', `M 0 ${y0} Q ${w / 2} ${y0 + sag * 2} ${w} ${y0}`);
+      }
+
+      function wrapDelta(i, center) {
+        let d = i - center;
+        while (d > N / 2) d -= N;
+        while (d < -N / 2) d += N;
+        return d;
+      }
+
+      polEls.forEach((el, idx) => {
+        el.addEventListener('click', () => {
+          if (movedPx > 8) return;
+          const activeIdx = ((Math.round(target) % N) + N) % N;
+          if (idx === activeIdx) {
+            openLightboxAlbum(idx);
+          } else {
+            const d = wrapDelta(idx, Math.round(target));
+            target = Math.round(target) + d;
+          }
+        });
+      });
+
+      stage.addEventListener('pointerdown', (e) => {
+        dragging = true;
+        movedPx = 0;
+        dragStartX = e.clientX;
+        dragStartPos = pos;
+        stage.setPointerCapture(e.pointerId);
+      });
+
+      stage.addEventListener('pointermove', (e) => {
+        if (!dragging) return;
+        const dx = e.clientX - dragStartX;
+        movedPx = Math.max(movedPx, Math.abs(dx));
+        const spacing = Math.min(340, Math.max(255, stage.clientWidth * 0.34));
+        const nextPos = dragStartPos - dx / spacing;
+        vel = (nextPos - pos) * 60;
+        pos = nextPos;
+        target = nextPos;
+      });
+
+      function endDrag() {
+        if (!dragging) return;
+        dragging = false;
+        target = Math.round(pos + vel * 0.08);
+      }
+      stage.addEventListener('pointerup', endDrag);
+      stage.addEventListener('pointercancel', endDrag);
+
+      document.getElementById('pol-prev').addEventListener('click', () => { target = Math.round(target) - 1; });
+      document.getElementById('pol-next').addEventListener('click', () => { target = Math.round(target) + 1; });
+
+      let lastT = performance.now();
+      function animatePolaroids(now) {
+        const dt = Math.min(0.032, (now - lastT) / 1000);
+        lastT = now;
+
+        const w = stage.clientWidth;
+        const cardW = Math.min(310, Math.max(230, w * 0.72));
+        const spacing = cardW + (w > 768 ? 52 : 24);
+        const y0 = 42;
+        const sag = Math.min(54, w * 0.045);
+
+        if (!dragging) {
+          // Critically damped spring
+          const k = 58;
+          const c = 2 * Math.sqrt(k);
+          const acc = k * (target - pos) - c * vel;
+          vel += acc * dt;
+          pos += vel * dt;
+        }
+
+        const lineVelPx = -vel * spacing;
+        const tSec = now / 1000;
+
+        for (let i = 0; i < N; i++) {
+          const d = wrapDelta(i, pos);
+          const x = w / 2 + d * spacing;
+          const y = stringY(x, w, y0, sag);
+
+          // Gentle ambient breeze + pendulum physics driven by line velocity
+          const breeze = Math.sin(tSec * 1.15 + i * 1.3) * 1.3;
+          const drive = Math.max(-18, Math.min(18, -lineVelPx * 0.012));
+          const springA = 24 * (breeze + drive - angles[i]) - 6.5 * angVel[i];
+          angVel[i] += springA * dt;
+          angles[i] += angVel[i] * dt;
+
+          const distAbs = Math.abs(d);
+          const scale = Math.max(0.84, 1.03 - distAbs * 0.09);
+          const opacity = distAbs > 2.6 ? 0 : Math.max(0.35, 1 - distAbs * 0.25);
+
+          const el = polEls[i];
+          el.style.width = `${cardW}px`;
+          el.style.transform = `translate3d(${(x - cardW / 2).toFixed(1)}px, ${y.toFixed(1)}px, 0) scale(${scale.toFixed(3)}) rotate(${angles[i].toFixed(2)}deg)`;
+          el.style.opacity = opacity.toFixed(3);
+          el.style.zIndex = String(20 - Math.round(distAbs * 4));
+          el.classList.toggle('is-center', distAbs < 0.45);
+        }
+
+        requestAnimationFrame(animatePolaroids);
+      }
+
+      /* ======================================================
+         4. SCROLL REVEAL & LIGHTBOX
+         ====================================================== */
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+      const lightbox = document.getElementById('lightbox');
+      const lbImg = document.getElementById('lightbox-img');
+      const lbTitle = document.getElementById('lightbox-title');
+      const lbDesc = document.getElementById('lightbox-desc');
+      const lbNav = document.getElementById('lightbox-nav');
+      let lbIndex = 0;
+
+      function openLightboxSingle(src, title, desc) {
+        lbImg.src = src;
+        lbTitle.textContent = title;
+        lbDesc.textContent = desc || '';
+        lbNav.style.display = 'none';
+        lightbox.classList.add('open');
+      }
+
+      function openLightboxAlbum(idx) {
+        lbIndex = ((idx % N) + N) % N;
+        const item = slides[lbIndex];
+        lbImg.src = item.src;
+        lbTitle.textContent = item.title;
+        lbDesc.textContent = item.desc;
+        lbNav.style.display = 'flex';
+        lightbox.classList.add('open');
+      }
+
+      document.querySelectorAll('[data-lightbox-src]').forEach((el) => {
+        el.addEventListener('click', () =>
+          openLightboxSingle(el.dataset.lightboxSrc, el.dataset.lightboxTitle, el.dataset.lightboxDesc)
+        );
+      });
+
+      document.getElementById('lightbox-close').addEventListener('click', () => lightbox.classList.remove('open'));
+      document.getElementById('lightbox-prev').addEventListener('click', () => openLightboxAlbum(lbIndex - 1));
+      document.getElementById('lightbox-next').addEventListener('click', () => openLightboxAlbum(lbIndex + 1));
+      lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.remove('open'); });
+      window.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('open')) return;
+        if (e.key === 'Escape') lightbox.classList.remove('open');
+        if (e.key === 'ArrowLeft' && lbNav.style.display !== 'none') openLightboxAlbum(lbIndex - 1);
+        if (e.key === 'ArrowRight' && lbNav.style.display !== 'none') openLightboxAlbum(lbIndex + 1);
+      });
+
+      window.addEventListener('resize', () => { resizeCanvas(); updateRope(); }, { passive: true });
+      preloadMode(activeMode);
+      resizeCanvas();
+      updateRope();
+      requestAnimationFrame(animateHero);
+      requestAnimationFrame(animatePolaroids);
+    })();
+  </script>
+</body>
+</html>
